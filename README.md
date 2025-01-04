@@ -1,8 +1,16 @@
-
-
 # Docker Container Setup for WeTTY
 
-This README provides instructions on how to set up and run a Docker container that installs and configures WeTTY, a web-based terminal for accessing the shell in your browser.
+This README provides instructions on how to set up and run a Docker container that installs and configures WeTTY, a web-based terminal for accessing the shell in your browser. This is a standalone Alpine Linux instance, and you can do anything terminal-based inside the browser.
+
+[Try it out](https://docker-wetty-alpine.onrender.com)
+
+You can:
+- Play Doom by running `DOOM/doom_ascii`
+- See the rainbow matrix with `cmatrix | lolcat`
+- Use `neofetch` to display system information
+- Unzip files with `unzip`
+- Download files with `wget`
+- Edit files with the VIM editor
 
 ## Prerequisites
 
@@ -90,10 +98,10 @@ docker rm wetty-container
 ## Troubleshooting
 
 - **Error: Could not connect to port 3000**  
-  Ensure the container is running (`docker ps`) and that the port mapping (`-p 3000:3000`) is correctly set.
+    Ensure the container is running (`docker ps`) and that the port mapping (`-p 3000:3000`) is correctly set.
 
 - **Error: No command found**  
-  Verify that the necessary binaries are installed by checking the Dockerfile commands for proper package installation.
+    Verify that the necessary binaries are installed by using the apk package manager, or checking the Dockerfile commands for proper package installation.
 
 ## Conclusion
 
