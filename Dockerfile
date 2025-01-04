@@ -1,32 +1,40 @@
-# Use Ubuntu 20.04 as base image
-FROM ubuntu:20.04
+# Use Alpine Linux as the base image for the smallest possible image size
+FROM alpine:latest
 
 # Avoid interactive prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Update packages and install required dependencies
-RUN apt-get update && apt-get install -y \
-    curl \
+RUN apk update && apk add --no-cache \
     bash \
-    openssh-server \
-    npm \
-    ca-certificates \
-    git && \
-    # Install pnpm globally
+    curl \
+    openssh \
+    git \
+    libc6-compat \
+    python3 \
+    python3-dev \
+    make \
+    g++ \
+    nodejs \
+    npm && \
+    ln -sf python3 /usr/bin/python && \
     npm install -g pnpm && \
-    # Install Node.js 18.x
-    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y nodejs && \
-    # Clone the WeTTY repository
-    git clone https://github.com/butlerx/wetty.git /wetty && \
-    # Set working directory to /wetty
+    python3 -m venv /venv && \
+    /venv/bin/pip install --upgrade pip && \
+    /venv/bin/pip install virtualenv && \
+    apk add --no-cache py3-setuptools
+
+# Activate the virtual environment and install Python packages
+RUN /venv/bin/pip install setuptools
+
+# Clone the WeTTY repository and install dependencies
+RUN git clone https://github.com/butlerx/wetty.git /wetty && \
     cd /wetty && \
-    # Install dependencies using pnpm
     pnpm install && \
-    # Build WeTTY from source (using the correct build command)
-    pnpm run build && \
-    # Clean up
-    rm -rf /var/lib/apt/lists/*
+    pnpm run build
+
+# Clean up unnecessary files
+RUN rm -rf /var/lib/apk/lists/* /root/.cache
 
 # Debug information
 RUN node -v && npm -v && pnpm -v
@@ -36,4 +44,4 @@ RUN ls -al /wetty/build
 EXPOSE 3000
 
 # Configure WeTTY to use bash shell
-CMD ["node", "wetty/build/main.js", "--base", "/bash", "--command", "/bin/bash", "--debug"]
+CMD ["node", "/wetty/build/main.js", "--base", "/bash", "--command", "/bin/bash", "--debug"]
