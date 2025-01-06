@@ -8,6 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apk update && apk add --no-cache \
     bash \
     curl \
+    cronie \
     openssh \
     git \
     libc6-compat \
@@ -33,6 +34,13 @@ RUN git clone https://github.com/butlerx/wetty.git /wetty && \
     pnpm install && \
     pnpm run build
 
+
+#Copy over the keep alive script, then start the cron daemon
+COPY keep_alive.sh /usr/local/bin/keep_alive.sh
+RUN chmod +x /usr/local/bin/keep_alive.sh
+RUN echo "*/5 * * * * /usr/local/bin/keep_alive.sh" >> /etc/crontabs/root
+RUN crond &
+
 # Clean up unnecessary files
 RUN rm -rf /var/lib/apk/lists/* /root/.cache
 
@@ -44,4 +52,4 @@ RUN ls -al /wetty/build
 EXPOSE 3000
 
 # Configure WeTTY to use bash shell
-CMD ["node", "/wetty/build/main.js", "--base", "/bash", "--command", "/bin/bash", "--debug"]
+CMD ["node", "/wetty/build/main.js", "--base", "/", "--command", "/bin/bash", "--debug"]
