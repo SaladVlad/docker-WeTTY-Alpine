@@ -1,16 +1,17 @@
 # Docker Container Setup for WeTTY
 
-This README provides instructions on how to set up and run a Docker container that installs and configures WeTTY, a web-based terminal for accessing the shell in your browser. This is a standalone Alpine Linux instance, and you can do anything terminal-based inside the browser. This kind of setup is a bit meta because you can technically stop/remove the entire terminal service or nuke the entire system using the infamous ```rm -rf /``` command :) 
+This README provides instructions on how to set up and run a Docker container that installs and configures WeTTY, a web-based terminal for accessing the shell in your browser. This is a standalone Alpine Linux instance, and you can do anything terminal-based inside the browser. This kind of setup is a bit meta because you can technically do anything: stop/remove the node terminal service (or nuke the entire system using the ```rm -rf /``` command)
 
 [Try it out](https://docker-wetty-alpine.onrender.com)
 
-You can:
-- Play Doom by running `DOOM/doom_ascii`mnv 
+On the deployed instance, you can:
+- Play Doom by running `DOOM/doom_ascii`
 - See the rainbow matrix with `cmatrix | lolcat`
 - Use `neofetch` to display system information
 - Unzip files with `unzip`
 - Download files with `wget`
 - Edit files with the VIM editor
+- Install or do anything else supported by the linux OS
 
 ## Prerequisites
 
