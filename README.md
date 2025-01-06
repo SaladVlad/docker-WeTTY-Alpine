@@ -1,11 +1,11 @@
 # Docker Container Setup for WeTTY
 
-This README provides instructions on how to set up and run a Docker container that installs and configures WeTTY, a web-based terminal for accessing the shell in your browser. This is a standalone Alpine Linux instance, and you can do anything terminal-based inside the browser.
+This README provides instructions on how to set up and run a Docker container that installs and configures WeTTY, a web-based terminal for accessing the shell in your browser. This is a standalone Alpine Linux instance, and you can do anything terminal-based inside the browser. This kind of setup is a bit meta because you can technically stop/remove the entire terminal service or nuke the entire system using the infamous ```rm -rf /``` command :) 
 
 [Try it out](https://docker-wetty-alpine.onrender.com)
 
 You can:
-- Play Doom by running `DOOM/doom_ascii`
+- Play Doom by running `DOOM/doom_ascii`mnv 
 - See the rainbow matrix with `cmatrix | lolcat`
 - Use `neofetch` to display system information
 - Unzip files with `unzip`
@@ -35,8 +35,8 @@ This Dockerfile sets up a container using **Alpine Linux** and installs the nece
 If you want to modify or track changes in the Dockerfile, first clone the repository with the following command:
 
 ```bash
-git clone https://github.com/your/repository.git
-cd your-repository
+git clone https://github.com/SaladVlad/docker-WeTTY-Alpine.git
+cd docker-WeTTY-Alpine
 ```
 
 If you only want to build the Docker image without cloning the repository, you can proceed with the next step.
