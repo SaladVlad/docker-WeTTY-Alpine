@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apk update && apk add --no-cache \
     bash \
     curl \
-    cronie \
+    #cronie \
     openssh \
     git \
     libc6-compat \
@@ -36,10 +36,10 @@ RUN git clone https://github.com/butlerx/wetty.git /wetty && \
 
 
 #Copy over the keep alive script, then start the cron daemon
-COPY keep_alive.sh /usr/local/bin/keep_alive.sh
-RUN chmod +x /usr/local/bin/keep_alive.sh
-RUN echo "*/5 * * * * /usr/local/bin/keep_alive.sh" >> /etc/crontabs/root
-RUN crond &
+# COPY keep_alive.sh /usr/local/bin/keep_alive.sh
+# RUN chmod +x /usr/local/bin/keep_alive.sh
+# RUN echo "*/5 * * * * /usr/local/bin/keep_alive.sh" >> /etc/crontabs/root
+# RUN crond &
 
 # Clean up unnecessary files
 RUN rm -rf /var/lib/apk/lists/* /root/.cache
