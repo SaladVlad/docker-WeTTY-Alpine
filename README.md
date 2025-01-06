@@ -2,7 +2,7 @@
 
 This README provides instructions on how to set up and run a Docker container that installs and configures WeTTY, a web-based terminal for accessing the shell in your browser. This is a standalone Alpine Linux instance, and you can do anything terminal-based inside the browser. This kind of setup is a bit meta because you can technically do anything: stop/remove the node terminal service (or nuke the entire system using the ```rm -rf /``` command)
 
-[Try it out](https://docker-wetty-alpine.onrender.com)
+[Try it out](https://docker-wetty-alpine.onrender.com) <== This particular instance is kept alive on Render deplyment services using a [Cron-Job](https://console.cron-job.org) externally pinging the service to provide a kept state
 
 On the deployed instance, you can:
 - Play Doom by running `DOOM/doom_ascii`
